@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cuestionario sobre Cultura General de Argentina</title>
+</head>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f8ff; /* Celeste claro */
+    }
+
+    h1,
+    #question,
+    #timer,
+    #results {
+        font-size: 24px;
+    }
+
+    ul#options li {
+        font-size: 18px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    #finalizarBtn {
+        font-size: 18px;
+        display: none;
+    }
+</style>
+
+<body>
+    <h1>Cuestionario sobre Cultura General de Argentina</h1>
+    <div id="quiz-container">
+        <p id="question"></p>
+        <ul id="options"></ul>
+        <p id="timer">Tiempo restante: <span id="countdown">60</span> segundos</p>
+    </div>
+    <div id="results"></div>
+
+    <script src="EntregaFinal.js"></script>
+
+    <button id="finalizarBtn" style="display: none;" onclick="redirigirAPagina()">Finalizar</button>
+
+    <script>
+        function redirigirAPagina() {
+            window.location.href = 'SimuladorDePremios.html';
+        }
+
+        document.getElementById('finalizarBtn').addEventListener('click', function () {
+        
+        redirigirAPagina();
+    });
+
+        function endQuiz() {
+            clearInterval(timerInterval);
+            document.getElementById("quiz-container").style.display = "none";
+            document.getElementById("results").textContent = `Resultado: ${score} de ${Preguntas.length} respuestas correctas`;
+
+            if (score === Preguntas.length) {
+                document.getElementById("finalizarBtn").style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
+

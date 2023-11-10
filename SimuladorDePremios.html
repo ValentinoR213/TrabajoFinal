@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Premios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #c3e6ff; /* Color celeste claro */
+            margin: 0;
+            padding: 0;
+        }
+
+        #message {
+            font-size: 20px;
+            margin-bottom: 10px;
+            background-color: #ffffff; /* Fondo blanco para resaltar mensajes */
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        button {
+            font-size: 16px;
+            margin: 5px;
+            padding: 10px;
+            background-color: #4caf50; /* Color verde para resaltar botones */
+            color: #ffffff; /* Texto blanco para contrastar */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1> Felicidades!! Has conseguido un Premio!! </h1>
+    <button id="startButton"> > PRECIONE AQUI < </button>
+    <div id="message" style="display: none;"></div>
+
+    <script>
+        document.getElementById("startButton").addEventListener("click", iniciarSimulador);
+
+        function mostrarMensaje(texto) {
+            const mensajeContainer = document.getElementById("message");
+            mensajeContainer.textContent = texto;
+            mensajeContainer.style.display = "block";
+        }
+
+        function ocultarMensaje() {
+            const mensajeContainer = document.getElementById("message");
+            mensajeContainer.style.display = "none";
+        }
+
+        function iniciarSimulador() {
+            mostrarMensaje("¡Bienvenido al Simulador de Premios!");
+
+            // Paso 1: Mostrar mensaje para seleccionar un número del 1 al 10
+            mostrarMensaje("Seleccione un número del 1 al 10:");
+
+            // Crear opciones del 1 al 10
+            for (let i = 1; i <= 10; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.addEventListener("click", () => mostrarPremio(i));
+                document.body.appendChild(button);
+            }
+        }
+
+        function mostrarPremio(numero) {
+            // Paso 2: Mostrar el premio correspondiente al número seleccionado
+            const premios = {
+                1: "Auriculares Logitech",
+                2: "Plasma TV de 32 pulgadas",
+                3: "iPhone 15 Pro Max",
+                4: "Lenovo Legion 5i Pro Gen 6",
+                5: "Placa de Video Nvidia",
+                6: "RTX 3090",
+                7: "PC Gamer Armada",
+                8: "PS 5",
+                9: "Xbox Serie X",
+                10: "Xiaomi Redmi Note 12 Pro"
+            };
+
+            const premioElegido = premios[numero];
+            mostrarMensaje(`¡Felicidades! Has ganado: ${premioElegido}`);
+
+            // Paso 3: Desaparecer las opciones
+            const botones = document.querySelectorAll("button");
+            botones.forEach((button) => button.remove());
+
+            // Paso 4: Mostrar mensaje de ser el cliente número 1000
+            setTimeout(() => {
+                mostrarMensaje("¡Eres el cliente número 1000!");
+
+                // Paso 5: Después de 5 segundos, mostrar mensaje de premio extra aleatorio
+                setTimeout(() => {
+                    mostrarMensaje("Se está decidiendo un premio extra aleatorio...");
+
+                    // Elegir aleatoriamente un premio extra del 1 al 10
+                    const premiosExtras = {
+                        1: "Tarjeta de regalo Amazon",
+                        2: "Suscripción anual a Netflix",
+                        3: "Smartwatch",
+                        4: "Bono de compra en tu tienda favorita",
+                        5: "Altavoces Bluetooth",
+                        6: "Cámara instantánea",
+                        7: "Tableta Android",
+                        8: "Auriculares inalámbricos",
+                        9: "Impresora portátil",
+                        10: "Tarjeta de regalo Starbucks"
+                    };
+
+                    const premioExtraElegido = premiosExtras[Math.floor(Math.random() * 10) + 1];
+
+                    // Paso 6: Después de 3 segundos, mostrar mensaje del premio extra y el botón siguiente
+                    setTimeout(() => {
+                        mostrarMensaje(`¡Felicidades! Has ganado un premio extra: ${premioExtraElegido}`);
+
+                        const botonSiguiente = document.createElement("button");
+                        botonSiguiente.textContent = "Siguiente";
+                        botonSiguiente.addEventListener("click", () => {
+                            botonSiguiente.remove();
+                            mostrarMensajeAgradecimiento(true);
+                        });
+                        document.body.appendChild(botonSiguiente);
+
+                    }, 3000);
+
+                }, 3000);
+            }, 3000);
+        }
+
+        function mostrarMensajeAgradecimiento(satisfaccion) {
+            // Paso 7: Mostrar mensaje de pregunta de satisfacción
+            mostrarMensaje("¿Te gustó el simulador?");
+
+            // Mostrar botones de opciones
+            const botonSi = document.createElement("button");
+            botonSi.textContent = "Sí";
+            botonSi.addEventListener("click", () => mostrarMensajeAgradecimientoFinal(satisfaccion));
+            document.body.appendChild(botonSi);
+
+            const botonNo = document.createElement("button");
+            botonNo.textContent = "No";
+            botonNo.addEventListener("click", () => mostrarMensajeAgradecimientoFinal(satisfaccion));
+            document.body.appendChild(botonNo);
+        }
+
+        function mostrarMensajeAgradecimientoFinal(satisfaccion) {
+            // Paso 8: Mostrar mensaje de agradecimiento y finalizar el simulador
+            ocultarMensaje();
+
+            // Ocultar botones de opciones
+            const botonesOpciones = document.querySelectorAll("button");
+            botonesOpciones.forEach((button) => button.remove());
+
+            if (satisfaccion) {
+                mostrarMensaje("¡Gracias por participar! Esperamos que disfrutes tus premios.");
+            } else {
+                mostrarMensaje("¡Gracias por probar el simulador! Esperamos verte de nuevo.");
+            }
+        }
+    </script>
+
+</body>
+</html>
