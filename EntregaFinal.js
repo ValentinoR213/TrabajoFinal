@@ -53,68 +53,68 @@ function iniciarCuestionario() {
         },  
     ];
 
-    let currentQuestion = 0;
-    let score = 0;
-    let countdown = 60;
+    let P = 0;
+    let Puntaje = 0;
+    let CuentaAtras = 60;
 
-    function displayQuestion() {
-        const questionElement = document.getElementById("question");
-        const optionsList = document.getElementById("options");
-        const question = Preguntas[currentQuestion];
+    function PreguntaD() {
+        const PreguntaE = document.getElementById("question");
+        const Opcionesl = document.getElementById("options");
+        const PreguntaR = Preguntas[P];
 
-        questionElement.textContent = question.question;
+        PreguntaE.textContent = PreguntaR.question;
 
-        optionsList.innerHTML = "";
+        Opcionesl.innerHTML = "";
 
-        question.options.forEach((option, index) => {
+        PreguntaR.options.forEach((option, index) => {
             const li = document.createElement("li");
             li.textContent = option;
-            li.addEventListener("click", () => checkAnswer(index));
-            optionsList.appendChild(li);
+            li.addEventListener("click", () => VerPregunta(index));
+            Opcionesl.appendChild(li);
         });
     }
 
-    function checkAnswer(selectedOption) {
-        const correctOption = Preguntas[currentQuestion].correct;
-        if (selectedOption === correctOption) {
-            score++;
+    function VerPregunta(OpcionElegida) {
+        const RespuestaCorrecta = Preguntas[P].correct;
+        if (OpcionElegida === RespuestaCorrecta) {
+            Puntaje++;
         }
-        currentQuestion++;
+        P++;
 
-        if (currentQuestion < Preguntas.length) {
-            displayQuestion();
+        if (P < Preguntas.length) {
+            PreguntaD();
         } else {
-            endQuiz();
+            TerminarCuestionario();
         }
     }
 
-    function updateTimer() {
-        const countdownElement = document.getElementById("countdown");
-        countdown--;
+    function TiempoA() {
+        const CuentaAtrasE = document.getElementById("CuentaAtrasR");
+        CuentaAtras--;
 
-        if (countdown <= 0) {
-            endQuiz();
+        if (CuentaAtras <= 0) {
+            TerminarCuestionario();
         } else {
-            countdownElement.textContent = countdown;
+            CuentaAtrasE.textContent = CuentaAtras;
         }
     }
 
-    function endQuiz() {
-        clearInterval(timerInterval);
-        document.getElementById("quiz-container").style.display = "none";
-        document.getElementById("results").textContent = `Resultado: ${score} de ${Preguntas.length} respuestas correctas`;
+    function TerminarCuestionario() {
+        clearInterval(TiempoI);
+        document.getElementById("Cuestionario-container").style.display = "none";
+        document.getElementById("results").textContent = `Resultado: ${Puntaje} de ${Preguntas.length} respuestas correctas`;
 
-        if (score === Preguntas.length) {
+        if (Puntaje === Preguntas.length) {
             setTimeout(function() {
-                let boton = document.getElementById('finalizarBtn'); 
+                let boton = document.getElementById('FinalizarBtn'); 
                 boton.addEventListener('click' , iniciarCuestionario);
                 boton.style.display = 'block';
             }, 1000);
         }
     }
 
-    displayQuestion();
-    const timerInterval = setInterval(updateTimer, 1000);
+    PreguntaD();
+    const TiempoI = setInterval(TiempoA, 1000);
 } 
 
 iniciarCuestionario();

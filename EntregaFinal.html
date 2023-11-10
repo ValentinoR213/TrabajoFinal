@@ -8,7 +8,7 @@
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #f0f8ff; /* Celeste claro */
+        background-color: #f0f8ff;
     }
 
     h1,
@@ -32,34 +32,34 @@
 
 <body>
     <h1>Cuestionario sobre Cultura General de Argentina</h1>
-    <div id="quiz-container">
+    <div id="Cuestionario-container">
         <p id="question"></p>
         <ul id="options"></ul>
-        <p id="timer">Tiempo restante: <span id="countdown">60</span> segundos</p>
+        <p id="timer">Tiempo restante: <span id="CuentaAtrasR">60</span> segundos</p>
     </div>
     <div id="results"></div>
 
     <script src="EntregaFinal.js"></script>
 
-    <button id="finalizarBtn" style="display: none;" onclick="redirigirAPagina()">Finalizar</button>
+    <button id="FinalizarBtn" style="display: none;" onclick="redirigirAPagina()">Finalizar</button>
 
     <script>
         function redirigirAPagina() {
             window.location.href = 'SimuladorDePremios.html';
         }
 
-        document.getElementById('finalizarBtn').addEventListener('click', function () {
+        document.getElementById('FinalizarBtn').addEventListener('click', function () {
         
         redirigirAPagina();
     });
 
-        function endQuiz() {
-            clearInterval(timerInterval);
-            document.getElementById("quiz-container").style.display = "none";
-            document.getElementById("results").textContent = `Resultado: ${score} de ${Preguntas.length} respuestas correctas`;
+        function TerminarCuestionario() {
+            clearInterval(TiempoI);
+            document.getElementById("Cuestionario-container").style.display = "none";
+            document.getElementById("results").textContent = `Resultado: ${Puntaje} de ${Preguntas.length} respuestas correctas`;
 
-            if (score === Preguntas.length) {
-                document.getElementById("finalizarBtn").style.display = "block";
+            if (Puntaje === Preguntas.length) {
+                document.getElementById("S").style.display = "block";
             }
         }
     </script>
